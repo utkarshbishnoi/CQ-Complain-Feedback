@@ -1,0 +1,45 @@
+public with sharing class ComplaintFeedbackService {
+    @auraEnabled
+    public static void requestFeedback(Id complaintId){
+
+        if(complaintId == null){
+            throw new AuraHandledException('Complaint Id is required.');
+        }
+        //Getting the Complaint details from Complaint Id
+        SQX_Complaint__c complaint = [ Select Id, Name, CQ_Title__c,CQ_Customer_Contact_Email__c from SQX_Complaint__c Where Id =: complaintId limit 1];
+        if (String.isBlank(complaint.CQ_Customer_Contact_Email__c)){
+            throw new AuraHandledException('Customer contact email is missing.');
+        }
+
+        //Creating a complaint feedback record when requesting it
+        SQX_Complaint_Feedback__c feedback = new SQX_Complaint_Feedback__c(
+        CQ_SQX_Related_To__c = complaint.Id,
+        CQ_Status__c = 'Requested');
+        insert feedback;
+        
+        //Experience Cloud Feedback Form Link
+        string baseUrl = Label.ExperienceCloudBaseURL;
+        string feedbackLink = baseUrl + '?id='+ feedback.Id;
+        
+        Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+        email.setToAddresses(new String[]{ complaint.CQ_Customer_Contact_Email__c});
+        email.setSubject('We need your valuable Feedback for Complaint '+ complaint.Name);
+        email.setHtmlBody('Hi, <br/><br/>Please click the link below to share your valuable feedback:<br/><a href="'+feedbackLink+'">Give Feedback</a><br/><br/>Thanks!');
+        try{
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] {email});   
+            System.debug('Email Sent Successfully.'); 
+        } catch(exception e) {
+            System.debug('Email Failed-->'+ e.getMessage());
+            throw new AuraHandledException('Failed to send Email: '+ e.getMessage());
+        }
+        
+    }
+    @AuraEnabled(cacheable=true)
+public static Boolean checkFeedbackExists(Id complaintId) {
+    return [
+        SELECT Id FROM SQX_Complaint_Feedback__c
+        WHERE CQ_SQX_Related_To__c = :complaintId
+        LIMIT 1
+    ].size() > 0;
+}
+}

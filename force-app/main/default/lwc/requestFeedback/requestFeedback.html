@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Request Feedback">
+        <div class="slds-p-horizontal_medium">
+            <!-- If feedback is not already requested, show active button -->
+            <template if:false={feedbackAlreadyRequested}>
+                <lightning-button
+                    label="Request Feedback"
+                    variant="brand"
+                    onclick={handleClick}
+                    disabled={isProcessing}>
+                </lightning-button>
+            </template>
+
+            <!-- If feedback already requested, show disabled button -->
+            <template if:true={feedbackAlreadyRequested}>
+                <lightning-button
+                    label="Feedback Already Requested"
+                    variant="neutral"
+                    disabled
+                    class="disabled-button">
+                </lightning-button>
+            </template>
+
+            <!-- Loading and error handling -->
+            <template if:true={isProcessing}>
+                <p>Sending feedback request...</p>
+            </template>
+
+            <template if:true={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

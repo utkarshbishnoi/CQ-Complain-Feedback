@@ -1,0 +1,41 @@
+<apex:page controller="FeedbackFormPublicController" showHeader="false" sidebar="false">
+    <apex:form rendered="{!NOT(submitted)}">
+
+        <apex:outputPanel rendered="{!invalid}">
+            <h2>Invalid or Expired Feedback Link.</h2>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!NOT(invalid)}">
+            <h2>Complaint Feedback Form</h2>
+            
+            <apex:outputPanel rendered="{!NOT(ISNULL(complaint))}">
+                <div style="border:1px solid #ccc; padding:10px; margin-bottom:15px; background:#f9f9f9;">
+                    <strong>Complaint Number:</strong> {!complaint.Name} <br/>
+                    <strong>Complaint Title:</strong> {!complaint.CQ_Title__c}
+                </div>
+            </apex:outputPanel>
+
+            <label>Experience:</label><br/>
+            <apex:selectRadio value="{!experience}">
+                <apex:selectOption itemLabel="1 - Highly Unsatisfied" itemValue="1 - Highly Unsatisfied"/>
+                <apex:selectOption itemLabel="2 - Satisfied" itemValue="2 - Satisfied"/>
+                <apex:selectOption itemLabel="3 - Highly Satisfied" itemValue="3 - Highly Satisfied"/>
+            </apex:selectRadio><br/><br/>
+
+            <label>Was your issue resolved?</label><br/>
+            <apex:selectRadio value="{!resolved}">
+                <apex:selectOption itemLabel="Yes" itemValue="Yes"/>
+                <apex:selectOption itemLabel="No" itemValue="No"/>
+            </apex:selectRadio><br/><br/>
+
+            <label>Additional Comments:</label><br/>
+            <apex:inputTextarea value="{!comment}" rows="4" cols="60"/><br/><br/>
+
+            <apex:commandButton value="Submit Feedback" action="{!submit}" />
+        </apex:outputPanel>
+    </apex:form>
+
+    <apex:outputPanel rendered="{!submitted}">
+        <h2>Thank you for your feedback!</h2>
+    </apex:outputPanel>
+</apex:page>

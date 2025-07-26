@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Complaint Feedback Form">
+        <div class="slds-p-horizontal_medium">
+            <template if:true={isLoaded}>
+                <lightning-record-view-form record-id={complaintId} object-api-name="SQX_Complaint__c">
+                    <div class="slds-box slds-box_xx-small ">
+                        <lightning-output-field field-name="Name"></lightning-output-field>
+                        <lightning-output-field field-name="CQ_Title__c"></lightning-output-field>
+                    </div>
+                    </lightning-record-view-form>
+                    <lightning-combobox name="experience"
+                        label="Your Experience" value={experience} options={experienceOptions} onchange={handleChange}>
+                    </lightning-combobox>
+                    <lightning-combobox name="resolved"
+                        label="Is the Issue Resolved?" value={resolved} options={resolvedOptions} onchange={handleChange}>
+                    </lightning-combobox>
+                    <lightning-textarea name="comment" label="Additional Comment" value={comment} onchange={handleChange}>
+                    </lightning-textarea>
+                    <lightning-button label="Submit Feedback" variant="brand" onclick={submitFeedbackForm} class="slds-m-top_medium">
+                    </lightning-button>
+            </template>
+           <template if:true={isSubmitted}>
+                <p class="slds-text-colour_success">Thank You! Your Feedback has been submitted.</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

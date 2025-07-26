@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Complete Feedback Review">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoaded}>
+                <lightning-record-view-form record-id={recordId} object-api-name="SQX_Complaint_Feedback__c">
+                    <div class="slds-box slds-box_xx-small">
+                        <lightning-output-field field-name="CQ_SQX_Related_To__c"></lightning-output-field>
+                        <lightning-output-field field-name="CQ_Experience__c"></lightning-output-field>
+                        <lightning-output-field field-name="CQ_Comment__c"></lightning-output-field>
+                    </div>
+                </lightning-record-view-form>
+                <lightning-combobox 
+                    label="Was the issue resolved?" value={resolution} options={resolutionOptions} onchange={handleChange} disabled={isDisabled}>
+                </lightning-combobox>
+                <lightning-button label="Complete Review" variant="brand" onclick={completeReview} class="slds-m-top_medium"  disabled={isDisabled}>
+                </lightning-button>
+            </template>
+            <template if:true={isSubmitted}>
+                <p class="slds-text-color_success">Thank You! Review completed and marked as resolved.</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
