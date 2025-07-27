@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Customer Success Team</name>
+    <queueMembers>
+        <users>
+            <user>acst@yopmail.com.cq</user>
+            <user>bcst@yopmail.com.cq</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>SQX_Complaint_Feedback__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>SQX_Complaint__c</sobjectType>
+    </queueSobject>
+</Queue>

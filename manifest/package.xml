@@ -66,5 +66,22 @@
 		<members>sfdcInternalInt__sfdc_scrt2</members>
 		<name>PermissionSet</name>
 	</types>
+	<types>
+		<members>*</members>
+		<name>Queue</name>
+	</types>
+	<types>
+		<members>Communities</members>
+		<members>Company</members>
+		<members>EmailTemplate</members>
+		<members>ExperienceBundle</members>
+		<members>MyDomain</members>
+		<members>Org</members>
+		<members>Picklist</members>
+		<members>RecordPage</members>
+		<members>Site</members>
+		<members>UserInterface</members>
+		<name>Settings</name>
+	</types>
 	<version>64.0</version>
 </Package>

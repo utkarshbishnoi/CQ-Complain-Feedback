@@ -1,7 +1,19 @@
+/**
+ * Service class for managing Complaint Feedback.
+ * This class provides methods to request feedback for a complaint 
+ * and check if feedback already exists for a complaint.
+ */
 public with sharing class ComplaintFeedbackService {
+    /**
+     * Sends a feedback request email to the customer linked with the given complaint.
+     * It also creates a new Complaint Feedback record with the status 'Requested'.
+     *
+     * @param complaintId The Id of the Complaint (SQX_Complaint__c) for which feedback is requested.
+     */
     @auraEnabled
     public static void requestFeedback(Id complaintId){
-
+        
+        // Validate that complaintId is not null
         if(complaintId == null){
             throw new AuraHandledException('Complaint Id is required.');
         }
@@ -21,6 +33,7 @@ public with sharing class ComplaintFeedbackService {
         string baseUrl = Label.ExperienceCloudBaseURL;
         string feedbackLink = baseUrl + '?id='+ feedback.Id;
         
+        //Prepare email message for sending feedback request
         Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
         email.setToAddresses(new String[]{ complaint.CQ_Customer_Contact_Email__c});
         email.setSubject('We need your valuable Feedback for Complaint '+ complaint.Name);
@@ -34,6 +47,12 @@ public with sharing class ComplaintFeedbackService {
         }
         
     }
+    /**
+     * Checks if a Complaint Feedback record exists for the given complaint.
+     *
+     * @param complaintId The Id of the Complaint (SQX_Complaint__c).
+     * @return Boolean True if a feedback record exists, otherwise false.
+     */
     @AuraEnabled(cacheable=true)
 public static Boolean checkFeedbackExists(Id complaintId) {
     return [

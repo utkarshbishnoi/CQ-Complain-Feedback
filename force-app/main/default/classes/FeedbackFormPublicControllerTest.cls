@@ -1,5 +1,14 @@
+/**
+ * Test class for FeedbackFormPublicController.
+ * It covers scenarios for valid submissions, missing feedback IDs, 
+ * and non-existent feedback records to ensure robust functionality.
+ */
 @IsTest
 public class FeedbackFormPublicControllerTest {
+    /**
+     * Positive test case:
+     * Verifies that a valid feedback record is updated successfully when form values are submitted.
+     */
 	 @isTest
     static void testSubmitWithValidFeedback() {
 		// Create admin user
@@ -76,6 +85,10 @@ public class FeedbackFormPublicControllerTest {
         System.assert(controller.submitted, 'submitted flag should be true');
     }
 
+    /**
+     * Negative test case:
+     * Verifies that controller marks form as invalid when no feedback ID is provided.
+     */
     @isTest
     static void testInvalidFeedbackId() {
         // No feedback ID passed
@@ -85,6 +98,10 @@ public class FeedbackFormPublicControllerTest {
         System.assert(controller.invalid, 'invalid flag should be true');
     }
 
+    /**
+     * Negative test case:
+     * Verifies that controller marks form as invalid when an invalid/non-existent feedback ID is provided.
+     */
     @isTest
     static void testMissingFeedbackRecord() {
         // Pass a random ID that doesn't exist
