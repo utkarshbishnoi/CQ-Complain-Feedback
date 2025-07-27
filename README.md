@@ -27,3 +27,13 @@ The `sfdx-project.json` file contains useful configuration information for your 
 8. Feedback Record has been updated and ownership has been assigned to the Customer Success Team Queue <img width="1766" height="917" alt="Screenshot 2025-07-27 021529" src="https://github.com/user-attachments/assets/d9d68ab0-3ec5-4eb8-9bce-4b8cf9432ef0" />
 9. Customer Success Team has marked it resolved and clicked on complete review button <img width="1766" height="917" alt="Screenshot 2025-07-27 021529" src="https://github.com/user-attachments/assets/4fecdc28-dd95-42d0-bfdc-8172588d8659" />
 10. Feedback record status has been changed to Resolved. <img width="1801" height="900" alt="Screenshot 2025-07-27 021608" src="https://github.com/user-attachments/assets/24fb984c-e1cb-4739-9be1-3298362ada9c" />
+# Notes
+1. Users added to the Customer Success Team queue
+   1. username: acst@yopmail.com.cq email = acst@yopmail.com password:Test@12345 profile = Standard Platform User
+   2. username: bcst@yopmail.com.cq email = acst@yopmail.com password:Test@12345 profile = Standard Platform User
+2. This was my first time experience with LWC,aura and VF page.
+
+# Improvements
+1. UI of the Feedback form will need a styling update.
+2. Email Template needs to be enhanced.
+
